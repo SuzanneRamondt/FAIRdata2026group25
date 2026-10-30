@@ -51,7 +51,7 @@
     sh:nodeKind sh:BlankNodeOrIRI ;
     sh:class dcat:Distribution ;
     sh:node :DistributionShape ;
-    sh:minCount 1 ;
+    sh:minCount 0 ;
     sh:maxCount 1 ;
     sh:order 0 ;
     dash:editor dash:DetailsEditor ;
@@ -65,10 +65,8 @@
     sh:path dct:format ;
     sh:name "Format"@en ;
     sh:description "Link or text that describes the format of the dataset."@en ;
-    sh:nodeKind sh:IRIOrLiteral ;
-    sh:datatype xsd:string ;
-    sh:class dct:MediaTypeOrExtent ;
-    sh:minCount 1 ;
+    sh:nodeKind sh:IRI ;
+    sh:minCount 0 ;
     sh:maxCount 1 ;
     sh:order 0 ;
     dash:editor dash:URIEditor
@@ -88,7 +86,6 @@
     sh:name "Conformance"@en ;
     sh:description "The standards that the file conforms to"@en ;
     sh:nodeKind sh:IRI ;
-    sh:class dct:Standard ;
     sh:minCount 0 ;
     sh:order 2 ;
     dash:editor dash:URIEditor
