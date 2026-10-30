@@ -10,7 +10,7 @@
 
 :Section2Group
   a sh:PropertyGroup ;
-  rdfs:label "Description" ;
+  rdfs:label "Title" ;
   sh:order 0 .
 
 :Section1Group
@@ -31,17 +31,6 @@
     sh:maxCount 1 ;
     sh:order 0 ;
     dash:editor dash:TextFieldEditor ;
-    sh:group :Section2Group
-  ] ;
-  sh:property [
-    sh:path dct:description ;
-    sh:name "Description"@en ;
-    sh:description "A free-text account of the distribution"@en ;
-    sh:nodeKind sh:Literal ;
-    sh:datatype xsd:string ;
-    sh:maxCount 1 ;
-    sh:order 1 ;
-    dash:editor dash:TextAreaEditor ;
     sh:group :Section2Group
   ] ;
   sh:property [

@@ -7,6 +7,7 @@
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
 
 :Section1Group
   a sh:PropertyGroup ;
@@ -22,6 +23,11 @@
   a sh:PropertyGroup ;
   rdfs:label "Provenance & Attribution" ;
   sh:order 2 .
+
+:Section4Group
+  a sh:PropertyGroup ;
+  rdfs:label "Distributions" ;
+  sh:order 3 .
 
 :Shape
   a sh:NodeShape ;
@@ -52,26 +58,13 @@
     sh:group :Section1Group
   ] ;
   sh:property [
-    sh:path dct:publisher ;
-    sh:name "Publisher"@en ;
-    sh:description "The entity responsible for making the dataset available"@en ;
-    sh:nodeKind sh:BlankNodeOrIRI ;
-    sh:class foaf:Organization ;
-    sh:node :PublisherShape ;
-    sh:minCount 1 ;
-    sh:maxCount 1 ;
-    sh:order 2 ;
-    dash:editor dash:DetailsEditor ;
-    sh:group :Section1Group
-  ] ;
-  sh:property [
     sh:path dct:issued ;
     sh:name "Issued" ;
     sh:description "Date of formal issuance"@en ;
     sh:nodeKind sh:Literal ;
     sh:datatype xsd:date ;
     sh:maxCount 1 ;
-    sh:order 3 ;
+    sh:order 2 ;
     dash:editor dash:DatePickerEditor ;
     sh:group :Section1Group
   ] ;
@@ -81,7 +74,7 @@
     sh:description "A keyword or tag describing the dataset"@en ;
     sh:nodeKind sh:Literal ;
     sh:datatype xsd:string ;
-    sh:order 4 ;
+    sh:order 3 ;
     dash:editor dash:TextFieldEditor ;
     sh:group :Section1Group
   ] ;
@@ -100,37 +93,88 @@
     sh:path dct:accessRights ;
     sh:name "Access Rights"@en ;
     sh:description "Information about who can access the resource"@en ;
-    sh:nodeKind sh:Literal ;
-    sh:datatype xsd:string ;
-    sh:minCount 1 ;
-    sh:maxCount 1 ;
-    sh:in ( "public" "restricted" "private" ) ;
-    sh:order 1 ;
-    dash:editor dash:EnumSelectEditor ;
-    sh:group :Section3Group
-  ] ;
-  sh:property [
-    sh:path dct:creator ;
-    sh:name "Author"@en ;
-    sh:description "The entity responsible for creating the content of the published dataset"@en ;
-    sh:nodeKind sh:Literal ;
-    sh:datatype xsd:string ;
-    sh:minCount 1 ;
-    sh:maxCount 1 ;
-    sh:order 0 ;
-    dash:editor dash:TextFieldEditor ;
-    sh:group :Section2Group
-  ] ;
-  sh:property [
-    sh:path dcat:landingPage ;
-    sh:name "Source Dataset"@en ;
-    sh:description "Link to the source of the original dataset"@en ;
     sh:nodeKind sh:IRI ;
     sh:minCount 1 ;
     sh:maxCount 1 ;
     sh:order 1 ;
     dash:editor dash:URIEditor ;
+    sh:group :Section3Group
+  ] ;
+  sh:property [
+    sh:path prov:wasAttributedTo ;
+    sh:name "Attributed to"@en ;
+    sh:description "Links an entity to the agent responsible for ascribing it"@en ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
+    sh:class prov:Agent ;
+    sh:node :AttributedtoShape ;
+    sh:order 0 ;
+    dash:editor dash:DetailsEditor ;
     sh:group :Section2Group
+  ] ;
+  sh:property [
+    sh:path dct:publisher ;
+    sh:name "Publisher"@en ;
+    sh:description "The entity responsible for making the original dataset available"@en ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
+    sh:class foaf:Organization ;
+    sh:node :PublisherShape ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:order 1 ;
+    dash:editor dash:DetailsEditor ;
+    sh:group :Section2Group
+  ] ;
+  sh:property [
+    sh:path dcat:landingPage ;
+    sh:name "Landing Page"@en ;
+    sh:description "Landing page of the FAIRified data"@en ;
+    sh:nodeKind sh:IRI ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:order 2 ;
+    dash:editor dash:URIEditor ;
+    sh:group :Section2Group
+  ] ;
+  sh:property [
+    sh:path dct:source ;
+    sh:name "Source Dataset"@en ;
+    sh:description "Link to the source of the original dataset"@en ;
+    sh:nodeKind sh:IRI ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:order 3 ;
+    dash:editor dash:URIEditor ;
+    sh:group :Section2Group
+  ] ;
+  sh:property [
+    sh:path dct:creator ;
+    sh:name "Creator(s)"@en ;
+    sh:description "An entity responsible for making the resource"@en ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
+    sh:node :CreatorsShape ;
+    sh:minCount 1 ;
+    sh:order 4 ;
+    dash:editor dash:DetailsEditor ;
+    sh:group :Section2Group
+  ] ;
+  sh:property [
+    sh:path dct:conformsTo ;
+    sh:name "Conforms To"@en ;
+    sh:description "The standards the dataset conforms to"@en ;
+    sh:nodeKind sh:IRI ;
+    sh:order 5 ;
+    dash:editor dash:URIEditor ;
+    sh:group :Section2Group
+  ] ;
+  sh:property [
+    sh:path dcat:distribution ;
+    sh:name "Link"@en ;
+    sh:description "Link to the distribution of the dataset"@en ;
+    sh:nodeKind sh:IRI ;
+    sh:minCount 1 ;
+    sh:order 0 ;
+    dash:editor dash:URIEditor ;
+    sh:group :Section4Group
   ] .
 
 :PublisherShape
@@ -139,6 +183,36 @@
   sh:property [
     sh:path foaf:name ;
     sh:name "Name"@en ;
+    sh:description "Name of publisher"@en ;
+    sh:nodeKind sh:Literal ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:order 0 ;
+    dash:editor dash:TextFieldEditor
+  ] .
+
+:CreatorsShape
+  a sh:NodeShape ;
+  sh:property [
+    sh:path foaf:name ;
+    sh:name "Name"@en ;
+    sh:description "Name of creator"@en ;
+    sh:nodeKind sh:Literal ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:order 0 ;
+    dash:editor dash:TextFieldEditor
+  ] .
+
+:AttributedtoShape
+  a sh:NodeShape ;
+  sh:targetClass prov:Agent ;
+  sh:property [
+    sh:path foaf:name ;
+    sh:name "Name"@en ;
+    sh:description "Name of those dataset was attributed to"@en ;
     sh:nodeKind sh:Literal ;
     sh:datatype xsd:string ;
     sh:minCount 1 ;

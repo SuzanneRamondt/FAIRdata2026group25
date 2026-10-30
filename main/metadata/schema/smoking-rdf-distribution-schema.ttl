@@ -34,25 +34,12 @@
     sh:group :Section2Group
   ] ;
   sh:property [
-    sh:path dct:description ;
-    sh:name "Description"@en ;
-    sh:description "A free-text account of the distribution"@en ;
-    sh:nodeKind sh:Literal ;
-    sh:datatype xsd:string ;
-    sh:minCount 0 ;
-    sh:maxCount 1 ;
-    sh:order 1 ;
-    dash:editor dash:TextAreaEditor ;
-    sh:group :Section2Group
-  ] ;
-  sh:property [
     sh:path dcat:distribution ;
     sh:name "Distribution" ;
     sh:nodeKind sh:BlankNodeOrIRI ;
     sh:class dcat:Distribution ;
     sh:node :DistributionShape ;
     sh:minCount 0 ;
-    sh:maxCount 1 ;
     sh:order 0 ;
     dash:editor dash:DetailsEditor ;
     sh:group :Section1Group
