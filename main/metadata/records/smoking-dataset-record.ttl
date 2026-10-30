@@ -1,0 +1,33 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+<https://w3id.org/FAIR-course-UT/2026/group25/metadata/record/dataset/smoking-health-dataset> a dcat:Dataset ;
+    dct:title "Smoking & Health Impact Dataset" ;
+    dct:description "A structured synthetic health dataset containing demographic details, smoking habits, organ status, and cardiovascular risk indicators across 2,500 patient records." ;
+    dct:issued "2026-10-30"^^xsd:date ;
+    dcat:keyword "Smoking behaviour", "Tobacco use", "Public health", "Organ health", "Healthcare analytics", "Risk assessment" ;
+    dct:license <https://creativecommons.org/publicdomain/zero/1.0/> ;
+    dct:accessRights <http://publications.europa.eu/resource/authority/access-right/PUBLIC> ;
+    prov:wasAttributedTo [
+        a prov:Agent ;
+        foaf:name "Suzanne Ramondt"
+    ], [
+        a prov:Agent ;
+        foaf:name "Fadziso Manwa"
+    ] ;
+    dct:publisher [
+        a foaf:Organization ;
+        foaf:name "University Of Twente"
+    ] ;
+    dcat:landingPage <https://github.com/SuzanneRamondt/SmokingHealth> ;
+    dct:source <https://www.kaggle.com/datasets/africahealthlab/smoking-health-dataset> ;
+    dct:creator [
+        foaf:name "Suzanne Ramondt"
+    ], [
+        foaf:name "Fadziso Manwa"
+    ] ;
+    dct:conformsTo <https://w3id.org/FAIR-course-UT/2026/group25/ont> ;
+    dcat:distribution <https://w3id.org/FAIR-course-UT/2026/group25/metadata/record/distribution/smoking-health-dataset-csv>, <https://w3id.org/FAIR-course-UT/2026/group25/metadata/record/distribution/smoking-health-dataset-rdf> .
