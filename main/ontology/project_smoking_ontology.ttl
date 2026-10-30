@@ -6,7 +6,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @base <urn:absolute:h/> .
 
-<https://w3id.org/FAIR-course-UT/2025-2026/group25/ont> rdf:type owl:Ontology .
+<https://w3id.org/FAIR-course-UT/2026/group25/ont> rdf:type owl:Ontology .
 
 #################################################################
 #    Object Properties
