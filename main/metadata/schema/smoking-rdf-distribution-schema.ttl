@@ -1,0 +1,95 @@
+@prefix : <http://fairdatapoint.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+:Section2Group
+  a sh:PropertyGroup ;
+  rdfs:label "Description" ;
+  sh:order 0 .
+
+:Section1Group
+  a sh:PropertyGroup ;
+  rdfs:label "Distribution & Format" ;
+  sh:order 1 .
+
+:Shape
+  a sh:NodeShape ;
+  rdfs:label "Smoking RDF Distribution Schema" ;
+  sh:targetClass dcat:Distribution ;
+  sh:property [
+    sh:path dct:title ;
+    sh:name "Title"@en ;
+    sh:description "A human-readable title for the distribution"@en ;
+    sh:nodeKind sh:Literal ;
+    sh:datatype xsd:string ;
+    sh:maxCount 1 ;
+    sh:order 0 ;
+    dash:editor dash:TextFieldEditor ;
+    sh:group :Section2Group
+  ] ;
+  sh:property [
+    sh:path dct:description ;
+    sh:name "Description"@en ;
+    sh:description "A free-text account of the distribution"@en ;
+    sh:nodeKind sh:Literal ;
+    sh:datatype xsd:string ;
+    sh:minCount 0 ;
+    sh:maxCount 1 ;
+    sh:order 1 ;
+    dash:editor dash:TextAreaEditor ;
+    sh:group :Section2Group
+  ] ;
+  sh:property [
+    sh:path dcat:distribution ;
+    sh:name "Distribution" ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
+    sh:class dcat:Distribution ;
+    sh:node :DistributionShape ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:order 0 ;
+    dash:editor dash:DetailsEditor ;
+    sh:group :Section1Group
+  ] .
+
+:DistributionShape
+  a sh:NodeShape ;
+  sh:targetClass dcat:Distribution ;
+  sh:property [
+    sh:path dct:format ;
+    sh:name "Format"@en ;
+    sh:description "Link or text that describes the format of the dataset."@en ;
+    sh:nodeKind sh:IRIOrLiteral ;
+    sh:datatype xsd:string ;
+    sh:class dct:MediaTypeOrExtent ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:order 0 ;
+    dash:editor dash:URIEditor
+  ] ;
+  sh:property [
+    sh:path dcat:byteSize ;
+    sh:name "File Size (Bytes)"@en ;
+    sh:description "Size of the file in bytes"@en ;
+    sh:nodeKind sh:Literal ;
+    sh:datatype xsd:integer ;
+    sh:maxCount 1 ;
+    sh:order 1 ;
+    dash:editor dash:NumberFieldEditor
+  ] ;
+  sh:property [
+    sh:path dct:conformsTo ;
+    sh:name "Conformance"@en ;
+    sh:description "The standards that the file conforms to"@en ;
+    sh:nodeKind sh:IRI ;
+    sh:class dct:Standard ;
+    sh:minCount 0 ;
+    sh:order 2 ;
+    dash:editor dash:URIEditor
+  ] .
